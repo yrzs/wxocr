@@ -69,6 +69,26 @@ def index():
     return render_template("index.html")
 
 
+def recognize_text(image_path):
+    """
+    识别图像中的文字并返回结果
+    
+    Args:
+        image_path: 图像文件路径
+        
+    Returns:
+        识别出的文字内容和区域信息
+    """
+    try:
+        # 调用现有的OCR功能
+        result = wcocr.ocr(image_path)
+        # 直接返回完整的结果对象，而不是只返回文本
+        return result
+    except Exception as e:
+        print(f"OCR识别错误: {str(e)}")
+        return {"errcode": -1, "error": str(e)}
+
+
 if __name__ == "__main__":
     # 确保templates目录存在
     templates_dir = os.path.join(
